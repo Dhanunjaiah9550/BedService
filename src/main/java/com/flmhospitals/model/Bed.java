@@ -36,4 +36,15 @@ public class Bed {
 	@JoinColumn(name="bedId")
 	private List<BedAssignmentHistory> bedAssignmentHistoryList;
 
+	public Bed(long bedNumber, boolean isOccupied, long patientId,
+			List<BedAssignmentHistory> bedAssignmentHistoryList) {
+		super();
+		this.bedNumber = bedNumber;
+		this.isOccupied = isOccupied;
+		this.patientId = patientId;
+		this.bedAssignmentHistoryList = bedAssignmentHistoryList;
+	}
+	
+	
+
 }
