@@ -1,5 +1,5 @@
 package com.flmhospitals.dao;
 
-public class BedRepository {
+public interface BedRepository {
 
 }
