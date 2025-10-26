@@ -32,8 +32,7 @@ public class Bed {
 	
 	private long patientId;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="bedId")
+	@OneToMany(mappedBy = "bed",cascade = CascadeType.ALL)
 	private List<BedAssignmentHistory> bedAssignmentHistoryList;
 
 	public Bed(long bedNumber, boolean isOccupied, long patientId,
