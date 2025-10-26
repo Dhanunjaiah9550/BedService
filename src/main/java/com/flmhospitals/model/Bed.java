@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,5 +43,7 @@ public class Bed {
 		this.patientId = patientId;
 		this.bedAssignmentHistoryList = bedAssignmentHistoryList;
 	}
+	
+	
 
 }
