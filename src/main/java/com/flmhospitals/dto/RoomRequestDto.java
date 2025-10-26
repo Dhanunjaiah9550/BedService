@@ -2,7 +2,6 @@ package com.flmhospitals.dto;
 
 import java.util.List;
 
-import com.flmhospitals.model.Bed;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,5 +18,5 @@ public class RoomRequestDto {
 
 	private long roomCapacity;
 
-	private List<Bed> beds;
+	private List<BedRequestDTO> beds;
 }
