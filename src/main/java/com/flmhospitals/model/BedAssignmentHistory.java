@@ -23,7 +23,7 @@ public class BedAssignmentHistory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long bedAssignmentHistoryId;
 	
 	@ManyToOne
 	@JoinColumn(name = "bed_id", nullable = false)
