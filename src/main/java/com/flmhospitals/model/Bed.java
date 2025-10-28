@@ -8,9 +8,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +22,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="Beds")
+@Builder
 public class Bed {
 	
 	@Id
@@ -31,6 +34,10 @@ public class Bed {
 	private boolean isOccupied;
 	
 	private long patientId;
+	
+	@ManyToOne
+    @JoinColumn(name = "room_id")  
+    private long room;
 	
 	@OneToMany(mappedBy = "bed",cascade = CascadeType.ALL)
 	private List<BedAssignmentHistory> bedAssignmentHistoryList;
