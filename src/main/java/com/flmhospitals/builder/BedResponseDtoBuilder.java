@@ -9,7 +9,7 @@ public class BedResponseDtoBuilder {
 		return BedDetailsResponseDTO.builder()
 								.bedId(bed.getBedId())
 								.bedNum(bed.getBedNumber())
-								.roomNumber(bed.getRoomId().getRoomNumber())
+								.roomNumber(bed.getRoom().getRoomNumber())
 								.isOccupied(bed.isOccupied())
 								.build();
 	}

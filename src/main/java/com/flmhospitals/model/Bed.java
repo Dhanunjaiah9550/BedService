@@ -34,19 +34,19 @@ public class Bed {
 	private long patientId;
 	
 	@ManyToOne
-    @JoinColumn(name = "roomId")
-	private Room roomId;
+    @JoinColumn(name = "room_id")
+	private Room room;
 	
 	@OneToMany(mappedBy = "bed",cascade = CascadeType.ALL)
 	private List<BedAssignmentHistory> bedAssignmentHistoryList;
 
-	public Bed(long bedNumber, boolean isOccupied, long patientId, Room roomId,
+	public Bed(long bedNumber, boolean isOccupied, long patientId, Room room,
 			List<BedAssignmentHistory> bedAssignmentHistoryList) {
 		super();
 		this.bedNumber = bedNumber;
 		this.isOccupied = isOccupied;
 		this.patientId = patientId;
-		this.roomId = roomId;
+		this.room = room;
 		this.bedAssignmentHistoryList = bedAssignmentHistoryList;
 	}
 
