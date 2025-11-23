@@ -15,13 +15,11 @@ public class RoomDTOBuilder {
 		
 		return RoomResponseDto
 				.builder()
-				.roomId(room.getRoomId())
 				.roomNumber(room.getRoomNumber())
 				.roomType(room.getRoomType())
 				.roomCapacity(room.getRoomCapacity())
 				.beds(buildBedDetailsResponseDtos(room.getBeds()))
 				.build();
-
 	}
 
 	private static List<BedDetailsResponseDTO> buildBedDetailsResponseDtos(List<Bed> beds) {

@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BedDetailsResponseDTO {
 	
-	private long bedId;
-	
 	private long bedNum;
 	
 	private long roomNumber;

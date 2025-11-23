@@ -1,11 +1,8 @@
 package com.flmhospitals.model;
 
 import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -16,41 +13,36 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="Beds")
+@Table(name = "Beds")
 @Builder
 public class Bed {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long bedId;
-	
 	private long bedNumber;
-	
+
 	private boolean isOccupied;
-	
+
 	private long patientId;
-	
+
 	@ManyToOne
-  @JoinColumn(name = "room_id")
+	@JoinColumn(name = "room_Number")
 	private Room room;
-	
-	@OneToMany(mappedBy = "bed",cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "bed", cascade = CascadeType.ALL)
 	private List<BedAssignmentHistory> bedAssignmentHistoryList;
 
-	public Bed(long bedNumber, boolean isOccupied, long patientId, Room room,
-			List<BedAssignmentHistory> bedAssignmentHistoryList) {
-		super();
-		this.bedNumber = bedNumber;
+	public Bed(boolean isOccupied, long patientId, Room room, List<BedAssignmentHistory> bedAssignmentHistoryList) {
+	
 		this.isOccupied = isOccupied;
+		
 		this.patientId = patientId;
+		
 		this.room = room;
+		
 		this.bedAssignmentHistoryList = bedAssignmentHistoryList;
 	}
-
-
 }
