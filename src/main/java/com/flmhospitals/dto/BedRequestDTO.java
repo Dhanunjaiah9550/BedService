@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BedRequestDTO {
 	
-	private int bedNum;
+	private long bedNum;
 	
 	private long roomNumber;
 	
