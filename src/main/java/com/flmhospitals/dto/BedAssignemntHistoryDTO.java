@@ -1,7 +1,6 @@
 package com.flmhospitals.dto;
 
 import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,8 +12,6 @@ public class BedAssignemntHistoryDTO {
 	
 	private long BedAssignemntHistoryId;
 	
-	private long bedId;
-	
 	private int bedNum;
 	
 //	private RoomDetailsResponseDTO roomDetailsResponseDTO;
@@ -25,19 +22,21 @@ public class BedAssignemntHistoryDTO {
 	
 	private LocalDateTime vacatedAt;
 
-	public BedAssignemntHistoryDTO(long bedId, int bedNum, String patientId, LocalDateTime assignedAt) {
-		super();
-		this.bedId = bedId;
+	public BedAssignemntHistoryDTO(int bedNum, String patientId, LocalDateTime assignedAt) {
+
 		this.bedNum = bedNum;
+		
 		this.patientId = patientId;
+		
 		this.assignedAt = assignedAt;
 	}
 
-	public BedAssignemntHistoryDTO(LocalDateTime vacatedAt,long bedId, int bedNum, String patientId) {
-		super();
-		this.bedId = bedId;
+	public BedAssignemntHistoryDTO(LocalDateTime vacatedAt, int bedNum, String patientId) {
+
 		this.bedNum = bedNum;
+		
 		this.patientId = patientId;
+		
 		this.vacatedAt = vacatedAt;
 	}
 	
