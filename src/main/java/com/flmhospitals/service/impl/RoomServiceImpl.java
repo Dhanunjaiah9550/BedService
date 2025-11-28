@@ -30,7 +30,7 @@ public class RoomServiceImpl implements RoomService{
 											.orElseThrow(()-> new RoomNotFoundException("Room Not Found with Room Number :"+roomNumber));
 	
 		Room updatedRoom = RoomBuilder.buildUpdateRoomFromRoomDto(existingRoom, roomRequestDto);
-		updatedRoom.setRoomId(existingRoom.getRoomId());
+		updatedRoom.setRoomNumber(existingRoom.getRoomNumber());
 		
 		Room room = roomRepository.save(updatedRoom);
 		

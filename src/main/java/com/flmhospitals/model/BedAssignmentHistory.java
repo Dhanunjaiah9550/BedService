@@ -28,7 +28,7 @@ public class BedAssignmentHistory {
 	private Long bedAssignmentHistoryId;
 	
 	@ManyToOne
-	@JoinColumn(name = "bed_id", nullable = false)
+	@JoinColumn(name = "bed_Number", nullable = false)
 	private Bed bed;
 	
 	@Column(name = "patient_id", nullable = false)

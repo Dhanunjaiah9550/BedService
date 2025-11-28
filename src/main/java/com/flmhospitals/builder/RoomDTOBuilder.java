@@ -15,13 +15,11 @@ public class RoomDTOBuilder {
 		
 		return RoomResponseDto
 				.builder()
-				.roomId(room.getRoomId())
 				.roomNumber(room.getRoomNumber())
 				.roomType(room.getRoomType())
 				.roomCapacity(room.getRoomCapacity())
 				.beds(buildBedDetailsResponseDtos(room.getBeds()))
 				.build();
-
 	}
 
 	private static List<BedDetailsResponseDTO> buildBedDetailsResponseDtos(List<Bed> beds) {
@@ -29,7 +27,7 @@ public class RoomDTOBuilder {
 		List<BedDetailsResponseDTO> bedDetailsResponseDto = new ArrayList<>();
 		for (Bed bed : beds) {
 			BedDetailsResponseDTO bedDto = BedDetailsResponseDTO.builder()
-	                .bedId(bed.getBedId())
+	                .bedNum(bed.getBedNumber())
 	                .bedNum(bed.getBedNumber())                      // 🔥 correct mapping
 	                .roomNumber(bed.getRoom().getRoomNumber())       // 🔥 map from room
 	                .isOccupied(bed.isOccupied())
