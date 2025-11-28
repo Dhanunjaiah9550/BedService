@@ -36,7 +36,7 @@ public class Bed {
 	private long patientId;
 	
 	@ManyToOne
-  @JoinColumn(name = "room_id")
+	@JoinColumn(name = "room_id")
 	private Room room;
 	
 	@OneToMany(mappedBy = "bed",cascade = CascadeType.ALL)
@@ -50,6 +50,12 @@ public class Bed {
 		this.patientId = patientId;
 		this.room = room;
 		this.bedAssignmentHistoryList = bedAssignmentHistoryList;
+	}
+
+	@Override
+	public String toString() {
+		return "Bed [bedId=" + bedId + ", bedNumber=" + bedNumber + ", isOccupied=" + isOccupied + ", patientId="
+				+ patientId + ", bedAssignmentHistoryList=" + bedAssignmentHistoryList + "]";
 	}
 
 
