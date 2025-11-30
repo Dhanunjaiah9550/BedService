@@ -10,16 +10,6 @@ import com.flmhospitals.model.Room;
 
 public class RoomBuilder {
 	
-	public  static Room buildUpdateRoomFromRoomDto(Room existingRoom,RoomRequestDto roomRequestDto) {
-		return Room.builder()
-							.roomCapacity(roomRequestDto.getRoomCapacity())
-							.roomNumber(roomRequestDto.getRoomNumber())
-							.roomType(roomRequestDto.getRoomType())
-							.beds(existingRoom.getBeds())
-							.build();
-							
-	}
-	
 	public static Room buildRoomFromRoomDTO(RoomRequestDto roomRequestDto) {
 		return Room.builder()
 			        .roomNumber(roomRequestDto.getRoomNumber())

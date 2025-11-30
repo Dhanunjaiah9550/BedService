@@ -26,7 +26,7 @@ public class RoomController {
 	public ResponseEntity<Boolean> removeRoom(@PathVariable("roomNumber") long roomNumber) {
 		return ResponseEntity.ok(roomService.removeRoom(roomNumber));
 	}
-	@PutMapping("/update/{roomNumber}")
+	@PutMapping("/update-rooms/{roomNumber}")
 	public ResponseEntity<RoomResponseDto> updateRoomDetails(@PathVariable long roomNumber,
 															@RequestBody RoomRequestDto roomRequestDto){
 		RoomResponseDto updatedRoomDetails = roomService.UpdateRoomDetails(roomNumber,roomRequestDto);

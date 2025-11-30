@@ -28,10 +28,10 @@ public class RoomServiceImpl implements RoomService{
 
 	@Override
 	public RoomResponseDto UpdateRoomDetails(long roomNumber,  RoomRequestDto roomRequestDto ) {
-		Room existingRoom = roomRepository.findByRoomNumber(roomNumber)
+		Room existingRoom = roomRepository.findById(roomNumber)
 											.orElseThrow(()-> new RoomNotFoundException("Room Not Found with Room Number :"+roomNumber));
 	
-		Room updatedRoom = RoomBuilder.buildUpdateRoomFromRoomDto(existingRoom, roomRequestDto);
+		Room updatedRoom = RoomBuilder.buildRoomFromRoomDTO(roomRequestDto);
 		updatedRoom.setRoomNumber(existingRoom.getRoomNumber());
 		
 		Room room = roomRepository.save(updatedRoom);
