@@ -5,7 +5,7 @@ import com.flmhospitals.model.Bed;
 
 public class BedBuilder {
 
-	public static Bed buildRequestDtoFromBed(BedRequestDTO bedRequestDTO) {
+	public static Bed buildBedFromBedRequestDto(BedRequestDTO bedRequestDTO) {
 		return Bed.builder()
 				  .bedNumber(bedRequestDTO.getBedNum())
 				  .isOccupied(bedRequestDTO.isOccupied())

@@ -1,6 +1,7 @@
 package com.flmhospitals.model;
 
 import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -28,6 +29,7 @@ public class Room {
 	private long roomCapacity;
 	
 	@OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+	
 	private List<Bed> beds;
 
 	public Room(String roomType, long roomCapacity, List<Bed> beds) {
