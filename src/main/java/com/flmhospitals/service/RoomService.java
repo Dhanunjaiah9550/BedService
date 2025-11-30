@@ -8,4 +8,5 @@ public interface RoomService {
 
 	RoomResponseDto UpdateRoomDetails(long roomNumber, RoomRequestDto roomRequestDto);
 
+	public boolean removeRoom(long roomNumber);
 }
