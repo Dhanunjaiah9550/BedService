@@ -1,10 +1,12 @@
 package com.flmhospitals.service;
 
+import org.springframework.http.ResponseEntity;
+
 import com.flmhospitals.dto.BedDetailsResponseDTO;
 import com.flmhospitals.dto.BedRequestDTO;
 
 public interface BedService {
 
-	BedDetailsResponseDTO addBedInRoom(BedRequestDTO bedRequestDTO);
+	ResponseEntity<String> addBedInRoom(BedRequestDTO bedRequestDTO);
 
 }

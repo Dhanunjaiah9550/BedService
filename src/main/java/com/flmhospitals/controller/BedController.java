@@ -26,13 +26,7 @@ public class BedController {
 	@PostMapping("/addBed")
 	public ResponseEntity<String> addBedInRoom(@RequestBody BedRequestDTO bedRequestDTO){
 
-		BedDetailsResponseDTO bedResponseDTO = bedService.addBedInRoom(bedRequestDTO);
-		if(bedResponseDTO != null) {
-			//return ResponseEntity.ok(bedResponseDTO);
-			return ResponseEntity.ok("Sucessfully added Bed Number "+bedRequestDTO.getBedNum()+" into Room Number "+bedRequestDTO.getRoomNumber());
-		}else {
-			return ResponseEntity.ok("Cannot add Bed into Room Number "+bedRequestDTO.getRoomNumber()+" as the room is fulled with beds");
-		}
+		 return bedService.addBedInRoom(bedRequestDTO);
 
 	}	
 

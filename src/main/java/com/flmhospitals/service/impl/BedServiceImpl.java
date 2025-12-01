@@ -2,6 +2,7 @@ package com.flmhospitals.service.impl;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.flmhospitals.builder.BedBuilder;
@@ -28,19 +29,28 @@ public class BedServiceImpl implements BedService {
 
 
 	@Override
-	public BedDetailsResponseDTO addBedInRoom(BedRequestDTO bedRequestDTO) {
+	public ResponseEntity<String> addBedInRoom(BedRequestDTO bedRequestDTO) {
 		// TODO Auto-generated method stub
 		Room existingRoom = roomRepository.findByRoomNumber(bedRequestDTO.getRoomNumber()) ;
+		if(existingRoom == null) {
+			return ResponseEntity.ok("Room Number "+bedRequestDTO.getRoomNumber()+" doesn't exists");
+		}
 		List<Bed> bedInExistingRoom = existingRoom.getBeds();
-		if(bedInExistingRoom.isEmpty() || (bedInExistingRoom.size() < existingRoom.getRoomCapacity()) ) {		
+		for (Bed bed : bedInExistingRoom) {
+			if(bedRequestDTO.getBedNum() == bed.getBedNumber()) {
+				 return ResponseEntity.ok("Bed Number "+bedRequestDTO.getBedNum()+" already added in Room Number "+bedRequestDTO.getRoomNumber());
+			}
+			
+		}
+		if(bedInExistingRoom.isEmpty() || (bedInExistingRoom.size() < existingRoom.getRoomCapacity()) ) {			
 			Bed bed = BedBuilder.buildRequestDtoFromBed(bedRequestDTO);
 			bed.setRoom(existingRoom);
-			
-			return BedResponseDtoBuilder.buildBedDetailsResponseDtoFromBed(bedRepository.save(bed));
+			 BedResponseDtoBuilder.buildBedDetailsResponseDtoFromBed(bedRepository.save(bed));
+			 return ResponseEntity.ok("Sucessfully added Bed Number "+bedRequestDTO.getBedNum()+" into Room Number "+bedRequestDTO.getRoomNumber());
 			 
 		}
 		
-		return null;
+		return ResponseEntity.ok("Cannot add Bed into Room Number "+bedRequestDTO. getRoomNumber()+" as the room is fulled with beds");
 	}
 
 }
