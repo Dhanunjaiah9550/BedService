@@ -43,7 +43,7 @@ public class BedServiceImpl implements BedService {
 			
 		}
 		if(bedInExistingRoom.isEmpty() || (bedInExistingRoom.size() < existingRoom.getRoomCapacity()) ) {			
-			Bed bed = BedBuilder.buildRequestDtoFromBed(bedRequestDTO);
+			Bed bed = BedBuilder.buildBedFromBedRequestDto(bedRequestDTO);
 			bed.setRoom(existingRoom);
 			 BedResponseDtoBuilder.buildBedDetailsResponseDtoFromBed(bedRepository.save(bed));
 			 return ResponseEntity.ok("Sucessfully added Bed Number "+bedRequestDTO.getBedNum()+" into Room Number "+bedRequestDTO.getRoomNumber());
