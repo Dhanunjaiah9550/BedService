@@ -1,9 +1,8 @@
 package com.flmhospitals.builder;
 
 
-import java.util.List;
 import java.util.ArrayList;
-import org.springframework.beans.BeanUtils;
+import java.util.List;
 import com.flmhospitals.dto.BedDetailsResponseDTO;
 import com.flmhospitals.dto.RoomResponseDto;
 import com.flmhospitals.model.Bed;
@@ -25,15 +24,11 @@ public class RoomDTOBuilder {
 	private static List<BedDetailsResponseDTO> buildBedDetailsResponseDtos(List<Bed> beds) {
 
 		List<BedDetailsResponseDTO> bedDetailsResponseDto = new ArrayList<>();
+		
 		for (Bed bed : beds) {
-			BedDetailsResponseDTO bedDto = BedDetailsResponseDTO.builder()
-	                .bedNum(bed.getBedNumber())
-	                .roomNumber(bed.getRoom().getRoomNumber())
-	                .isOccupied(bed.isOccupied())
-	                .build();
-			bedDetailsResponseDto.add(bedDto);
+			bedDetailsResponseDto.add(BedResponseDtoBuilder.buildBedDetailsResponseDtoFromBed(bed));
 		}
-
+		
 		return bedDetailsResponseDto;
 	}
 }
