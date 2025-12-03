@@ -3,9 +3,13 @@ package com.flmhospitals.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.flmhospitals.dto.RoomRequestDto;
+import com.flmhospitals.dto.RoomResponseDto;
 import com.flmhospitals.service.RoomService;
 
 @RestController
@@ -21,6 +25,13 @@ public class RoomController {
 	@DeleteMapping("/delete-rooms/{roomNumber}")
 	public ResponseEntity<Boolean> removeRoom(@PathVariable("roomNumber") long roomNumber) {
 		return ResponseEntity.ok(roomService.removeRoom(roomNumber));
+	}
+	@PutMapping("/update-rooms/{roomNumber}")
+	public ResponseEntity<RoomResponseDto> updateRoomDetails(@PathVariable long roomNumber,
+															@RequestBody RoomRequestDto roomRequestDto){
+		RoomResponseDto updatedRoomDetails = roomService.UpdateRoomDetails(roomNumber,roomRequestDto);
+		return ResponseEntity.ok(updatedRoomDetails);
+		
 	}
 
 }

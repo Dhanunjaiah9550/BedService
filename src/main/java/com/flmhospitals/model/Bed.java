@@ -45,4 +45,5 @@ public class Bed {
 		
 		this.bedAssignmentHistoryList = bedAssignmentHistoryList;
 	}
+
 }

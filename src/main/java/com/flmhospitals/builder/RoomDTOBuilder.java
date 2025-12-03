@@ -26,8 +26,11 @@ public class RoomDTOBuilder {
 
 		List<BedDetailsResponseDTO> bedDetailsResponseDto = new ArrayList<>();
 		for (Bed bed : beds) {
-			BedDetailsResponseDTO bedDto = new BedDetailsResponseDTO();
-			BeanUtils.copyProperties(bed, bedDto);
+			BedDetailsResponseDTO bedDto = BedDetailsResponseDTO.builder()
+	                .bedNum(bed.getBedNumber())
+	                .roomNumber(bed.getRoom().getRoomNumber())
+	                .isOccupied(bed.isOccupied())
+	                .build();
 			bedDetailsResponseDto.add(bedDto);
 		}
 
