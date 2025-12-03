@@ -28,8 +28,7 @@ public class RoomDTOBuilder {
 		for (Bed bed : beds) {
 			BedDetailsResponseDTO bedDto = BedDetailsResponseDTO.builder()
 	                .bedNum(bed.getBedNumber())
-	                .bedNum(bed.getBedNumber())                      // 🔥 correct mapping
-	                .roomNumber(bed.getRoom().getRoomNumber())       // 🔥 map from room
+	                .roomNumber(bed.getRoom().getRoomNumber())
 	                .isOccupied(bed.isOccupied())
 	                .build();
 			bedDetailsResponseDto.add(bedDto);
