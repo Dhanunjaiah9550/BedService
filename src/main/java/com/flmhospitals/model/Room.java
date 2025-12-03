@@ -29,7 +29,6 @@ public class Room {
 	private long roomCapacity;
 	
 	@OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-	
 	private List<Bed> beds;
 
 	public Room(String roomType, long roomCapacity, List<Bed> beds) {
