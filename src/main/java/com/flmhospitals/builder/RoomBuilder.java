@@ -22,10 +22,12 @@ public class RoomBuilder {
 	private static List<Bed> buildBedFromBedDTO(List<BedRequestDTO> bedRequestDTOs){
 		List<Bed> bedList = new ArrayList<>();
 		
+		if (bedRequestDTOs != null) { 
 		for(BedRequestDTO beds : bedRequestDTOs) {
 			Bed bed = new Bed();
 			BeanUtils.copyProperties(beds, bed);
 			bedList.add(bed);
+		}
 		}
 		return bedList;
 	}
