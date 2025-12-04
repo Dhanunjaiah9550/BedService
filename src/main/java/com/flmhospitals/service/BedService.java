@@ -9,4 +9,6 @@ public interface BedService {
 
 	ResponseEntity<String> addBedInRoom(BedRequestDTO bedRequestDTO);
 
+	ResponseEntity<BedDetailsResponseDTO> updateBedDetails(long roomNumber, long bedNumber, BedRequestDTO bedRequestDTO);
+
 }
