@@ -6,4 +6,5 @@ import com.flmhospitals.model.Bed;
 
 public interface BedRepository extends JpaRepository<Bed, Long>{
 
+	Bed findByBedNumberAndRoom_RoomNumber(long bedNumber, long roomNumber);
 }
