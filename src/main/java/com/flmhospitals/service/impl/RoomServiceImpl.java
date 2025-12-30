@@ -76,6 +76,16 @@ public class RoomServiceImpl implements RoomService {
 		roomRepository.delete(room);
 		return true;
 	}
+	@Override
+	public List<RoomResponseDto> getAllRoomDetails() {
+		 List<Room> rooms = roomRepository.findAll();
+		 List<RoomResponseDto> roomResponse=new ArrayList<>();
+		 for(Room room:rooms) {
+			 RoomResponseDto roomResponseDtofromRoom = RoomDTOBuilder.buildRoomResponseDtofromRoom(room);
+			 roomResponse.add(roomResponseDtofromRoom);
+		 }
+		return roomResponse;
+	}
 
 
 }

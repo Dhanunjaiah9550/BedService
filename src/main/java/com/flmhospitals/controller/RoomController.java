@@ -1,9 +1,13 @@
 package com.flmhospitals.controller;
 
 
+import java.util.List;
+import com.flmhospitals.service.impl.RoomServiceImpl;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,10 +23,13 @@ import com.flmhospitals.service.RoomService;
 @RequestMapping("/rooms")
 public class RoomController {
 
+    private final RoomServiceImpl roomServiceImpl;
+
 	private final RoomService roomService;
 
-	public RoomController(RoomService roomService) {
+	public RoomController(RoomService roomService, RoomServiceImpl roomServiceImpl) {
 		this.roomService = roomService;
+		this.roomServiceImpl = roomServiceImpl;
 	}
 	
 	@PostMapping("/addroom")
@@ -42,6 +49,12 @@ public class RoomController {
 															@RequestBody RoomRequestDto roomRequestDto){
 		RoomResponseDto updatedRoomDetails = roomService.UpdateRoomDetails(roomNumber,roomRequestDto);
 		return ResponseEntity.ok(updatedRoomDetails);
+		
+	}
+	@GetMapping("/getRooms")
+	public ResponseEntity<List<RoomResponseDto>> getAllRoomDetails(){
+		List<RoomResponseDto> allRoomDetails = roomServiceImpl.getAllRoomDetails();
+		return ResponseEntity.status(HttpStatus.OK).body(allRoomDetails);
 		
 	}
 
