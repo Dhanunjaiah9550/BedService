@@ -23,13 +23,10 @@ import com.flmhospitals.service.RoomService;
 @RequestMapping("/rooms")
 public class RoomController {
 
-    private final RoomServiceImpl roomServiceImpl;
-
 	private final RoomService roomService;
 
-	public RoomController(RoomService roomService, RoomServiceImpl roomServiceImpl) {
+	public RoomController(RoomService roomService) {
 		this.roomService = roomService;
-		this.roomServiceImpl = roomServiceImpl;
 	}
 	
 	@PostMapping("/addroom")
@@ -53,7 +50,7 @@ public class RoomController {
 	}
 	@GetMapping("/getRooms")
 	public ResponseEntity<List<RoomResponseDto>> getAllRoomDetails(){
-		List<RoomResponseDto> allRoomDetails = roomServiceImpl.getAllRoomDetails();
+		List<RoomResponseDto> allRoomDetails = roomService.getAllRoomDetails();
 		return ResponseEntity.status(HttpStatus.OK).body(allRoomDetails);
 		
 	}
