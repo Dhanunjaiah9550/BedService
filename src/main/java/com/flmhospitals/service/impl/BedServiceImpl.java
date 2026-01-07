@@ -1,6 +1,7 @@
 package com.flmhospitals.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ import com.flmhospitals.dao.BedRepository;
 import com.flmhospitals.dao.RoomRepository;
 import com.flmhospitals.dto.BedDetailsResponseDTO;
 import com.flmhospitals.dto.BedRequestDTO;
+import com.flmhospitals.exception.BedNotFoundException;
+import com.flmhospitals.exception.RoomNotFoundException;
 import com.flmhospitals.model.Bed;
 import com.flmhospitals.model.Room;
 import com.flmhospitals.service.BedService;
@@ -51,6 +54,23 @@ public class BedServiceImpl implements BedService {
 		}
 		
 		return ResponseEntity.ok("Cannot add Bed into Room Number "+bedRequestDTO. getRoomNumber()+" as the room is fulled with beds");
+	}
+
+
+	@Override
+	public ResponseEntity<BedDetailsResponseDTO> updateBedDetails(long roomNumber, long bedNumber,
+			BedRequestDTO bedRequestDTO) {
+		Room existingRoom = roomRepository.findById(roomNumber).orElseThrow(()->new RoomNotFoundException("Room not Found with Id:"+roomNumber));
+		System.out.println(existingRoom);
+		Bed existingBed = bedRepository.findBedWithRoomNumber(bedNumber, existingRoom.getRoomNumber())
+				 										.orElseThrow(()-> new BedNotFoundException("Bed Not Found with BedNumber :"+bedNumber+" in RoomNumber: "+roomNumber));
+		existingBed.setOccupied(bedRequestDTO.isOccupied());
+		existingBed.setRoom(existingRoom);
+		System.out.println("existing :"+existingBed);
+		Bed savedBed = bedRepository.save(existingBed);
+		 System.out.println(savedBed);
+		BedDetailsResponseDTO response = BedResponseDtoBuilder.buildBedDetailsResponseDtoFromBed(savedBed);
+		return ResponseEntity.ok(response);
 	}
 
 }
