@@ -28,23 +28,25 @@ public class RoomController {
 	public RoomController(RoomService roomService) {
 		this.roomService = roomService;
 	}
-	
+
 	@PostMapping("/addroom")
-	public ResponseEntity<RoomResponseDto> addRoom(@RequestBody RoomRequestDto roomRequestDto){
-		
+	public ResponseEntity<RoomResponseDto> addRoom(@RequestBody RoomRequestDto roomRequestDto) {
+
 		RoomResponseDto roomResponseDto = roomService.addRoom(roomRequestDto);
-		
+
 		return ResponseEntity.status(HttpStatus.CREATED).body(roomResponseDto);
-		
+
 	}
+
 	@DeleteMapping("/delete-rooms/{roomNumber}")
 	public ResponseEntity<Boolean> removeRoom(@PathVariable("roomNumber") long roomNumber) {
 		return ResponseEntity.ok(roomService.removeRoom(roomNumber));
 	}
+
 	@PutMapping("/update-rooms/{roomNumber}")
 	public ResponseEntity<RoomResponseDto> updateRoomDetails(@PathVariable long roomNumber,
-															@RequestBody RoomRequestDto roomRequestDto){
-		RoomResponseDto updatedRoomDetails = roomService.UpdateRoomDetails(roomNumber,roomRequestDto);
+			@RequestBody RoomRequestDto roomRequestDto) {
+		RoomResponseDto updatedRoomDetails = roomService.UpdateRoomDetails(roomNumber, roomRequestDto);
 		return ResponseEntity.ok(updatedRoomDetails);
 		
 	}
@@ -56,5 +58,6 @@ public class RoomController {
 	}
 
 
+	}
 
 }
