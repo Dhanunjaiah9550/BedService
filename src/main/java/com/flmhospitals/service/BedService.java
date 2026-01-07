@@ -2,6 +2,7 @@ package com.flmhospitals.service;
 
 import org.springframework.http.ResponseEntity;
 
+import com.flmhospitals.dto.BedDetailsResponseDTO;
 import com.flmhospitals.dto.BedRequestDTO;
 
 public interface BedService {
