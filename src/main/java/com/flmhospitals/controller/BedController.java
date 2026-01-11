@@ -45,7 +45,6 @@ public class BedController {
 	@PutMapping("/update-bed/{roomNumber}/{bedNumber}")
 	public ResponseEntity<BedDetailsResponseDTO> updateBedDetails(@PathVariable(name="roomNumber") long roomNumber,@PathVariable(name="bedNumber") long bedNumber,@RequestBody BedRequestDTO bedRequestDTO){
 		ResponseEntity<BedDetailsResponseDTO> updateBedDetails = bedService.updateBedDetails(roomNumber,bedNumber,bedRequestDTO);
-		System.out.println(updateBedDetails);
 		return updateBedDetails;
 	}
 
