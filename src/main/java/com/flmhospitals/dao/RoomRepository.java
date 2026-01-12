@@ -10,6 +10,5 @@ public interface RoomRepository extends JpaRepository<Room, Long>{
 
 	Room findByRoomNumber(long roomNumber);
 	
-	Room findByRoomNumber(long roomNumber);
 	
 }

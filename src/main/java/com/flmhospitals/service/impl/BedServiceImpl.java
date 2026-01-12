@@ -10,8 +10,10 @@ import com.flmhospitals.builder.BedBuilder;
 import com.flmhospitals.builder.BedResponseDtoBuilder;
 import com.flmhospitals.dao.BedRepository;
 import com.flmhospitals.dao.RoomRepository;
+import com.flmhospitals.dto.BedDetailsResponseDTO;
 import com.flmhospitals.dto.BedRequestDTO;
 import com.flmhospitals.exception.BedNotFoundException;
+import com.flmhospitals.exception.BedUnavailableException;
 import com.flmhospitals.exception.RoomNotFoundException;
 import com.flmhospitals.model.Bed;
 import com.flmhospitals.model.Room;
@@ -84,6 +86,42 @@ public class BedServiceImpl implements BedService {
 		 System.out.println(savedBed);
 		BedDetailsResponseDTO response = BedResponseDtoBuilder.buildBedDetailsResponseDtoFromBed(savedBed);
 		return ResponseEntity.ok(response);
+	}
+	
+	@Override
+	public List<BedDetailsResponseDTO> getBedsByRoomId(long roomNumber) {
+
+		Room room = roomRepository.findById(roomNumber)
+	            .orElseThrow(() -> 
+	                new RoomNotFoundException("Room not found with room number " + roomNumber));
+
+	    List<Bed> beds = bedRepository.findByRoomRoomNumber(roomNumber);
+
+	    if (beds.isEmpty()) {
+	        throw new BedNotFoundException("No beds found for room number " + roomNumber);
+	    }
+
+	    return beds.stream()
+	            .map(BedResponseDtoBuilder::buildBedDetailsResponseDtoFromBed)
+	            .toList();
+	}
+	
+	@Override
+	public List<BedDetailsResponseDTO> getVacantBedsByRoomNumber(long roomNumber) {
+
+		Room room = roomRepository.findById(roomNumber)
+	            .orElseThrow(() ->
+	                new RoomNotFoundException("Room not found with room number " + roomNumber));
+
+	    List<Bed> vacantBeds = bedRepository.findByRoomRoomNumberAndIsOccupiedFalse(roomNumber);
+
+	    if (vacantBeds.isEmpty()) {
+	        throw new BedUnavailableException("No vacant beds available in room number " + roomNumber);
+	    }
+
+	    return vacantBeds.stream()
+	            .map(BedResponseDtoBuilder::buildBedDetailsResponseDtoFromBed)
+	            .toList();
 	}
 
 }
