@@ -10,6 +10,7 @@ import com.flmhospitals.builder.BedBuilder;
 import com.flmhospitals.builder.BedResponseDtoBuilder;
 import com.flmhospitals.dao.BedRepository;
 import com.flmhospitals.dao.RoomRepository;
+import com.flmhospitals.dto.BedDetailsResponseDTO;
 import com.flmhospitals.dto.BedRequestDTO;
 import com.flmhospitals.exception.BedNotFoundException;
 import com.flmhospitals.exception.RoomNotFoundException;
