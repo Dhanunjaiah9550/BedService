@@ -75,14 +75,11 @@ public class BedServiceImpl implements BedService {
 	public ResponseEntity<BedDetailsResponseDTO> updateBedDetails(long roomNumber, long bedNumber,
 			BedRequestDTO bedRequestDTO) {
 		Room existingRoom = roomRepository.findById(roomNumber).orElseThrow(()->new RoomNotFoundException("Room not Found with Id:"+roomNumber));
-		System.out.println(existingRoom);
 		Bed existingBed = bedRepository.findBedWithRoomNumber(bedNumber, existingRoom.getRoomNumber())
 				 										.orElseThrow(()-> new BedNotFoundException("Bed Not Found with BedNumber :"+bedNumber+" in RoomNumber: "+roomNumber));
 		existingBed.setOccupied(bedRequestDTO.isOccupied());
 		existingBed.setRoom(existingRoom);
-		System.out.println("existing :"+existingBed);
 		Bed savedBed = bedRepository.save(existingBed);
-		 System.out.println(savedBed);
 		BedDetailsResponseDTO response = BedResponseDtoBuilder.buildBedDetailsResponseDtoFromBed(savedBed);
 		return ResponseEntity.ok(response);
 	}
