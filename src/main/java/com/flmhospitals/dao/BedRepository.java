@@ -1,5 +1,6 @@
 package com.flmhospitals.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,8 @@ public interface BedRepository extends JpaRepository<Bed, Long>{
 	Optional<Bed> findBedWithRoomNumber(@Param("bedNumber")long bedNumber,@Param("roomNumber")long roomNumber);
 
 	Bed findByBedNumberAndRoom_RoomNumber(long bedNumber, long roomNumber);
+	
+	List<Bed> findByRoomRoomNumber(long roomNumber);
+
+	List<Bed> findByRoomRoomNumberAndIsOccupiedFalse(long roomNumber);
 }

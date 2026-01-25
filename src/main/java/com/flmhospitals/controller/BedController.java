@@ -1,7 +1,10 @@
 package com.flmhospitals.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -47,5 +50,17 @@ public class BedController {
 		ResponseEntity<BedDetailsResponseDTO> updateBedDetails = bedService.updateBedDetails(roomNumber,bedNumber,bedRequestDTO);
 		return updateBedDetails;
 	}
+	
+	@GetMapping("/room/{roomNumber}")
+    public ResponseEntity<List<BedDetailsResponseDTO>> getAllBedsInRoom(@PathVariable long roomNumber) {
+
+        return ResponseEntity.ok(bedService.getBedsByRoomId(roomNumber));
+    }
+	
+	@GetMapping("/vacant/room/{roomNumber}")
+    public ResponseEntity<List<BedDetailsResponseDTO>> getVacantBeds(@PathVariable long roomNumber) {
+
+        return ResponseEntity.ok(bedService.getVacantBedsByRoomNumber(roomNumber));
+    }
 
 }
