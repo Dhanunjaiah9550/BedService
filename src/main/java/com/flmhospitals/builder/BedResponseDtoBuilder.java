@@ -7,7 +7,7 @@ public class BedResponseDtoBuilder {
 	
 	public static BedDetailsResponseDTO buildBedDetailsResponseDtoFromBed(Bed bed) {
 		return BedDetailsResponseDTO.builder()
-								.bedNum(bed.getBedNumber())
+								.bedNumber(bed.getBedNumber())
 								.roomNumber(bed.getRoom().getRoomNumber())
 								.isOccupied(bed.isOccupied())
 								.build();

@@ -1,7 +1,12 @@
 package com.flmhospitals.controller;
 
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,20 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.flmhospitals.dto.BedDetailsResponseDTO;
 import com.flmhospitals.dto.BedRequestDTO;
+import com.flmhospitals.dto.RoomResponseDto;
 import com.flmhospitals.service.BedService;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/bed")
 public class BedController {
-
-    private final RoomController roomController;
 	
 	private final BedService bedService;
 
-	public BedController(BedService bedService, RoomController roomController) {
+	public BedController(BedService bedService) {
 		super();
 		this.bedService = bedService;
-		this.roomController = roomController;
 	}
 
 	@DeleteMapping("/delete-bed/{bedNumber}/{roomNumber}")
@@ -46,6 +50,13 @@ public class BedController {
 	public ResponseEntity<BedDetailsResponseDTO> updateBedDetails(@PathVariable(name="roomNumber") long roomNumber,@PathVariable(name="bedNumber") long bedNumber,@RequestBody BedRequestDTO bedRequestDTO){
 		ResponseEntity<BedDetailsResponseDTO> updateBedDetails = bedService.updateBedDetails(roomNumber,bedNumber,bedRequestDTO);
 		return updateBedDetails;
+	}
+	
+	@GetMapping("/getBeds")
+	public ResponseEntity<List<BedDetailsResponseDTO>> getAllBedDetails(){
+		List<BedDetailsResponseDTO> allBedDetails = bedService.getAllBedDetails();
+		return ResponseEntity.status(HttpStatus.OK).body(allBedDetails);
+		
 	}
 
 }

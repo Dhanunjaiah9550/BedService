@@ -1,9 +1,12 @@
 package com.flmhospitals.service;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 
 import com.flmhospitals.dto.BedDetailsResponseDTO;
 import com.flmhospitals.dto.BedRequestDTO;
+import com.flmhospitals.dto.RoomResponseDto;
 
 public interface BedService {
 
@@ -12,5 +15,7 @@ public interface BedService {
 	ResponseEntity<String> addBedInRoom(BedRequestDTO bedRequestDTO);
 
 	ResponseEntity<BedDetailsResponseDTO> updateBedDetails(long roomNumber, long bedNumber, BedRequestDTO bedRequestDTO);
+
+	List<BedDetailsResponseDTO> getAllBedDetails();
 
 }

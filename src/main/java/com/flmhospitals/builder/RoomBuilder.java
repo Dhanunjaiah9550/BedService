@@ -21,11 +21,12 @@ public class RoomBuilder {
 	
 	private static List<Bed> buildBedFromBedDTO(List<BedRequestDTO> bedRequestDTOs){
 		List<Bed> bedList = new ArrayList<>();
-		
 		if (bedRequestDTOs != null) { 
 		for(BedRequestDTO beds : bedRequestDTOs) {
 			Bed bed = new Bed();
-			BeanUtils.copyProperties(beds, bed);
+			System.out.println(beds.getBedNumber());
+			bed.setBedNumber(beds.getBedNumber());
+            bed.setOccupied(beds.isOccupied());
 			bedList.add(bed);
 		}
 		}

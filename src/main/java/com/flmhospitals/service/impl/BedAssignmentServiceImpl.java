@@ -1,11 +1,17 @@
 package com.flmhospitals.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.flmhospitals.builder.BedAssignmentHistoryBuilder;
 import com.flmhospitals.dao.BedAssignmentHistoryRepository;
 import com.flmhospitals.dao.BedRepository;
+import com.flmhospitals.dto.BedAssignmentHistoryDTO;
+import com.flmhospitals.dto.BedDetailsResponseDTO;
 import com.flmhospitals.exception.BedNotFoundException;
 import com.flmhospitals.exception.BedUnavailableException;
 import com.flmhospitals.model.Bed;
@@ -44,6 +50,26 @@ public class BedAssignmentServiceImpl implements BedAssignmentService {
 		bedHistoryRepository.save(bedHistory);
 
 		return bed;
+	}
+
+	@Override
+	public void vacateBed(long roomNumber, long bedNumber) {
+		Bed bed = bedRepository.findBedWithRoomNumber(bedNumber, roomNumber).orElseThrow(()-> new BedNotFoundException("Bed Not Found with BedNumber :"+bedNumber+" in RoomNumber: "+roomNumber));
+		BedAssignmentHistory activeAssignment = bedHistoryRepository.findTopByBed_BedNumberAndVacatedAtIsNullOrderByAssignedAtDesc(bedNumber);
+
+	    activeAssignment.setVacatedAt(LocalDateTime.now());
+	    
+		bed.setOccupied(false);
+	    bed.setPatientId(0);
+	    bedRepository.save(bed);
+	    bedHistoryRepository.save(activeAssignment);
+	}
+
+	@Override
+	public List<BedAssignmentHistoryDTO> getHistoryByBedNumber(long bedNumber) {
+		List<BedAssignmentHistory> bedHistory = bedHistoryRepository.findByBed_BedNumber(bedNumber);
+		List<BedAssignmentHistoryDTO> bedHistoryDTO = BedAssignmentHistoryBuilder.buildBedHistoryDTOFromBedHistory(bedHistory);
+		return bedHistoryDTO;
 	}
 
 }
