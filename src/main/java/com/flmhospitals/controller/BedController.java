@@ -19,7 +19,6 @@ import com.flmhospitals.dto.BedRequestDTO;
 import com.flmhospitals.dto.RoomResponseDto;
 import com.flmhospitals.service.BedService;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/bed")
 public class BedController {

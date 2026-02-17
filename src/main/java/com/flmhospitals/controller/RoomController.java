@@ -20,7 +20,6 @@ import com.flmhospitals.dto.RoomRequestDto;
 import com.flmhospitals.dto.RoomResponseDto;
 import com.flmhospitals.service.RoomService;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/rooms")
 public class RoomController {
