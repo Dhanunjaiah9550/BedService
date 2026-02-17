@@ -58,5 +58,16 @@ public class BedController {
 		return ResponseEntity.status(HttpStatus.OK).body(allBedDetails);
 		
 	}
+	@GetMapping("/room/{roomNumber}")
+    public ResponseEntity<List<BedDetailsResponseDTO>> getAllBedsInRoom(@PathVariable long roomNumber) {
+
+        return ResponseEntity.ok(bedService.getBedsByRoomId(roomNumber));
+    }
+	
+	@GetMapping("/vacant/room/{roomNumber}")
+    public ResponseEntity<List<BedDetailsResponseDTO>> getVacantBeds(@PathVariable long roomNumber) {
+
+        return ResponseEntity.ok(bedService.getVacantBedsByRoomNumber(roomNumber));
+    }
 
 }

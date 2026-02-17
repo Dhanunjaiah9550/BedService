@@ -15,6 +15,10 @@ public interface BedService {
 	ResponseEntity<String> addBedInRoom(BedRequestDTO bedRequestDTO);
 
 	ResponseEntity<BedDetailsResponseDTO> updateBedDetails(long roomNumber, long bedNumber, BedRequestDTO bedRequestDTO);
+	
+	List<BedDetailsResponseDTO> getBedsByRoomId(long roomNumber);
+	
+	List<BedDetailsResponseDTO> getVacantBedsByRoomNumber(long roomNumber);
 
 	List<BedDetailsResponseDTO> getAllBedDetails();
 
