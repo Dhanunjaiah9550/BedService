@@ -16,7 +16,6 @@ import com.flmhospitals.dto.BedDetailsResponseDTO;
 import com.flmhospitals.model.Bed;
 import com.flmhospitals.service.BedAssignmentService;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/bed")
 public class BedAssignmentController {
