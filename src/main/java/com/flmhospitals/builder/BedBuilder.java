@@ -7,7 +7,7 @@ public class BedBuilder {
 
 	public static Bed buildBedFromBedRequestDto(BedRequestDTO bedRequestDTO) {
 		return Bed.builder()
-				  .bedNumber(bedRequestDTO.getBedNum())
+				  .bedNumber(bedRequestDTO.getBedNumber())
 				  .isOccupied(bedRequestDTO.isOccupied())
 				  .build();
 	}

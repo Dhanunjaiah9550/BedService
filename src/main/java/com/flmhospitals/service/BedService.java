@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.flmhospitals.dto.BedDetailsResponseDTO;
 import com.flmhospitals.dto.BedRequestDTO;
+import com.flmhospitals.dto.RoomResponseDto;
 
 public interface BedService {
 
@@ -18,5 +19,7 @@ public interface BedService {
 	List<BedDetailsResponseDTO> getBedsByRoomId(long roomNumber);
 	
 	List<BedDetailsResponseDTO> getVacantBedsByRoomNumber(long roomNumber);
+
+	List<BedDetailsResponseDTO> getAllBedDetails();
 
 }

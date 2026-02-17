@@ -12,6 +12,7 @@ import com.flmhospitals.dao.BedRepository;
 import com.flmhospitals.dao.RoomRepository;
 import com.flmhospitals.dto.BedDetailsResponseDTO;
 import com.flmhospitals.dto.BedRequestDTO;
+import com.flmhospitals.dto.RoomResponseDto;
 import com.flmhospitals.exception.BedNotFoundException;
 import com.flmhospitals.exception.BedUnavailableException;
 import com.flmhospitals.exception.RoomNotFoundException;
@@ -40,8 +41,8 @@ public class BedServiceImpl implements BedService {
 		}
 		List<Bed> bedInExistingRoom = existingRoom.getBeds();
 		for (Bed bed : bedInExistingRoom) {
-			if (bedRequestDTO.getBedNum() == bed.getBedNumber()) {
-				return ResponseEntity.ok("Bed Number " + bedRequestDTO.getBedNum() + " already added in Room Number "
+			if (bedRequestDTO.getBedNumber() == bed.getBedNumber()) {
+				return ResponseEntity.ok("Bed Number " + bedRequestDTO.getBedNumber() + " already added in Room Number "
 						+ bedRequestDTO.getRoomNumber());
 			}
 
@@ -50,7 +51,7 @@ public class BedServiceImpl implements BedService {
 			Bed bed = BedBuilder.buildBedFromBedRequestDto(bedRequestDTO);
 			bed.setRoom(existingRoom);
 			BedResponseDtoBuilder.buildBedDetailsResponseDtoFromBed(bedRepository.save(bed));
-			return ResponseEntity.ok("Sucessfully added Bed Number " + bedRequestDTO.getBedNum() + " into Room Number "
+			return ResponseEntity.ok("Sucessfully added Bed Number " + bedRequestDTO.getBedNumber() + " into Room Number "
 					+ bedRequestDTO.getRoomNumber());
 
 		}
@@ -61,11 +62,7 @@ public class BedServiceImpl implements BedService {
 
 	@Override
 	public ResponseEntity<String> removeBed(long bedNumber, long roomNumber) {
-		Bed bed = bedRepository.findByBedNumberAndRoom_RoomNumber(bedNumber, roomNumber);
-
-		if (bed == null) {
-			return ResponseEntity.status(404).body("Bed Number not found");
-		}
+		Bed bed = bedRepository.findBedWithRoomNumber(bedNumber, roomNumber).orElseThrow(()-> new BedNotFoundException("Bed Not Found with BedNumber :"+bedNumber+" in RoomNumber: "+roomNumber));
 
 		bedRepository.delete(bed);
 		return ResponseEntity.ok("Bed removed from the room");
@@ -119,6 +116,13 @@ public class BedServiceImpl implements BedService {
 	    return vacantBeds.stream()
 	            .map(BedResponseDtoBuilder::buildBedDetailsResponseDtoFromBed)
 	            .toList();
+	}
+
+	@Override
+	public List<BedDetailsResponseDTO> getAllBedDetails() {
+		List<Bed> allBeds = bedRepository.findAll();
+		List<BedDetailsResponseDTO> allBedsResponse = allBeds.stream().map(bed ->BedResponseDtoBuilder.buildBedDetailsResponseDtoFromBed(bed)).toList();
+		return allBedsResponse;
 	}
 
 }

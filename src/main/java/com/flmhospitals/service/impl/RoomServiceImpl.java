@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.flmhospitals.builder.BedBuilder;
 import com.flmhospitals.builder.RoomBuilder;
 import com.flmhospitals.builder.RoomDTOBuilder;
+import com.flmhospitals.controller.RoomController;
 import com.flmhospitals.dao.RoomRepository;
 import com.flmhospitals.dto.BedRequestDTO;
 import com.flmhospitals.dto.RoomRequestDto;
@@ -33,6 +34,8 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public RoomResponseDto addRoom(RoomRequestDto roomRequestDto) {
+		
+		System.out.println("RoomRequestDto "+roomRequestDto);
 
 	    Room room = RoomBuilder.buildRoomFromRoomDTO(roomRequestDto);
 
@@ -47,6 +50,7 @@ public class RoomServiceImpl implements RoomService {
 	        }
 	        room.setBeds(bedEntities);
 	    }
+	   System.out.println("Room "+room.getBeds());
 	    Room savedRoom = roomRepository.save(room);
 	  	    
 	    return RoomDTOBuilder.buildRoomResponseDtofromRoom(savedRoom);
@@ -60,11 +64,25 @@ public class RoomServiceImpl implements RoomService {
 		Room existingRoom = roomRepository.findById(roomNumber)
 											.orElseThrow(()-> new RoomNotFoundException("Room Not Found with Room Number :"+roomNumber));
 	
-		Room updatedRoom = RoomBuilder.buildRoomFromRoomDTO(roomRequestDto);
-		updatedRoom.setRoomNumber(existingRoom.getRoomNumber());
-		
-		Room room = roomRepository.save(updatedRoom);
-		
+//		Room updatedRoom = RoomBuilder.buildRoomFromRoomDTO(roomRequestDto);
+//		updatedRoom.setRoomNumber(existingRoom.getRoomNumber());
+//		
+//		Room room = roomRepository.save(updatedRoom);
+		existingRoom.setRoomType(roomRequestDto.getRoomType());
+		existingRoom.setRoomCapacity(roomRequestDto.getRoomCapacity());
+
+//		// Clear old beds
+//		existingRoom.getBeds().clear();
+//
+//		for (BedRequestDTO dto : roomRequestDto.getBeds()) {
+//		    Bed bed = new Bed();
+//		    bed.setBedNumber(dto.getBedNumber());
+//		    bed.setOccupied(dto.isOccupied());
+//		    bed.setRoom(existingRoom);
+//		    existingRoom.getBeds().add(bed);
+//		}
+
+		Room room = roomRepository.save(existingRoom);
 		return RoomDTOBuilder.buildRoomResponseDtofromRoom(room);
 		
 	}
